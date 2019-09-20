@@ -5,9 +5,6 @@
 
 #include <stdio.h>
 
-#define FALSE 0
-#define TRUE 1
-
 #define MAX_LENGTH 30
 
 int main()
