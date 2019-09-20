@@ -11,7 +11,7 @@ int main()
     int counts[CHAR_COUNT];
 
     // Initialize count array
-    for (int i = 0; i <= CHAR_COUNT; i++)
+    for (int i = 0; i < CHAR_COUNT; i++)
     {
         counts[i] = 0;
     }
@@ -34,7 +34,7 @@ int main()
     // Print chart
     printf("\nCharacter count\n");
     printf("---------------\n");
-    for (int i = 0; i <= CHAR_COUNT; i++)
+    for (int i = 0; i < CHAR_COUNT; i++)
     {
         int count = counts[i];
         // if (count == 0)
