@@ -4,9 +4,6 @@
 
 #include <stdio.h>
 
-#define FALSE 0
-#define TRUE 1
-
 #define CHAR_COUNT 26
 
 int main()
