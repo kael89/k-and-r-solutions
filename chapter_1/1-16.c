@@ -9,7 +9,6 @@
 #define bool int
 
 int get_line(char line[], int max_length);
-void init_string(char string[], int length);
 bool is_line(char string[]);
 void copy(char to[], char from[]);
 
@@ -18,10 +17,6 @@ int main()
     char line[BUFFER_LENGTH];
     char subline[BUFFER_LENGTH];
     char longest_line[BUFFER_LENGTH];
-
-    // init_string(line, BUFFER_LENGTH);
-    // init_string(subline, BUFFER_LENGTH);
-    // init_string(longest_line, BUFFER_LENGTH);
 
     int max_length = 0;
     int line_length = 0;
@@ -56,14 +51,6 @@ int main()
     }
 
     return 0;
-}
-
-void init_string(char string[], int length)
-{
-    for (int i = 0; i < length; i++)
-    {
-        string[i] = 0;
-    }
 }
 
 int get_line(char line[], int max_length)
