@@ -1,0 +1,30 @@
+{
+  "K & R": {
+    "prefix": "kr",
+    "body": [
+      "/**",
+      " * ${1:TODO description}",
+      " */",
+      "",
+      "#include <stdio.h>",
+      "",
+      "int main()",
+      "{",
+      "\t${2}",
+      "}"
+    ],
+    "description": "Basic template for K & R exercises"
+  },
+  "New line": {
+    "prefix": "nl",
+    "body": ["putchar('\\n');"]
+  },
+  "Print": {
+    "prefix": "pr",
+    "body": ["printf(\"$1\"$2);"]
+  },
+  "Print new line": {
+    "prefix": "prl",
+    "body": ["printf(\"$1\\n\"$2);"]
+  }
+}
