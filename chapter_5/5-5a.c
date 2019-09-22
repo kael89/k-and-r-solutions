@@ -23,8 +23,8 @@ int main()
     read_str(str1);
     read_str(str2);
     read_str(n_input);
-    strn_cpy(str1, str2, atoi(n_input));
-    printf("%s\n", str1);
+    int n = atoi(n_input);
+    printf("%s\n", strn_cpy(str1, str2, n));
 
     return 0;
 }
