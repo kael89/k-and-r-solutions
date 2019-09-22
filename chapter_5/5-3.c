@@ -18,8 +18,7 @@ int main()
 
     read_str(str1);
     read_str(str2);
-    strcat(str1, str2);
-    printf("%s\n", str1);
+    printf("%s\n", strcat(str1, str2));
 
     return 0;
 }
@@ -36,6 +35,8 @@ void read_str(char *str)
 
 char *strcat(char *str1, char *str2)
 {
+    char *result_p = str1;
+
     while (*str1)
     {
         str1++;
@@ -45,5 +46,5 @@ char *strcat(char *str1, char *str2)
         ;
     }
 
-    return str1;
+    return result_p;
 }
