@@ -53,24 +53,6 @@ int strend(char *s, char *t)
     return *s == *t;
 }
 
-int strend1(char *s, char *t)
-{
-    int length_s = str_len(s);
-    int length_t = str_len(t);
-
-    if (length_t > length_s)
-    {
-        return 0;
-    }
-
-    while (length_t-- > 0 && *s-- == *t--)
-    {
-        ;
-    }
-
-    return *s == *t;
-}
-
 int str_len(char *s)
 {
     int i = 0;

@@ -34,24 +34,6 @@ void read_str(char *str)
     *str = '\0';
 }
 
-char *strcat2(char *str1, char *str2)
-{
-    while (*str1)
-    {
-        str1++;
-    }
-
-    while (*str2)
-    {
-        *str1 = *str2;
-        str1++;
-        str2++;
-    }
-    *str1 = '\0';
-
-    return str1;
-}
-
 char *strcat(char *str1, char *str2)
 {
     while (*str1)
