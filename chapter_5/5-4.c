@@ -7,7 +7,6 @@
 
 #define MAX_LENGTH 100
 
-void read_str(char *str);
 int str_len(char *s);
 int strend(char *s, char *t);
 
@@ -16,22 +15,12 @@ int main()
     char str1[MAX_LENGTH];
     char str2[MAX_LENGTH];
 
-    read_str(str1);
-    read_str(str2);
+    scanf("%s", str1);
+    scanf("%s", str2);
     int result = strend(str1, str2);
     printf("%d\n", result);
 
     return 0;
-}
-
-void read_str(char *str)
-{
-    while ((*str = getchar()) != '\n')
-    {
-        str++;
-        ;
-    }
-    *str = '\0';
 }
 
 int strend(char *s, char *t)

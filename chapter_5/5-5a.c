@@ -10,7 +10,6 @@
 
 #define MAX_LENGTH 100
 
-void read_str(char *str);
 int str_len(char *s);
 char *strn_cpy(char *s, char *t, int n);
 
@@ -18,12 +17,11 @@ int main()
 {
     char str1[MAX_LENGTH];
     char str2[MAX_LENGTH];
-    char n_input[MAX_LENGTH];
+    int n;
 
-    read_str(str1);
-    read_str(str2);
-    read_str(n_input);
-    int n = atoi(n_input);
+    scanf("%s", str1);
+    scanf("%s", str2);
+    scanf("%d", &n);
     printf("%s\n", strn_cpy(str1, str2, n));
 
     return 0;
@@ -45,16 +43,6 @@ char *strn_cpy(char *s, char *t, int n)
     }
 
     return result_p;
-}
-
-void read_str(char *str)
-{
-    while ((*str = getchar()) != '\n')
-    {
-        str++;
-        ;
-    }
-    *str = '\0';
 }
 
 int str_len(char *s)
