@@ -5,18 +5,11 @@
 
 #include <ctype.h>
 #include <stdio.h>
+#include "../lib.h"
 
-#define bool int
-#define FALSE 0
-#define TRUE 1
 #define SIZE 2014
 
-int getch(void);
-void ungetch(int c);
 int getint(int *);
-bool is_valid_character(char c);
-bool is_sign(char c);
-bool is_sign_followed_by_digit(char c);
 void print_numbers(int numbers[], int count);
 
 int main()
@@ -50,7 +43,7 @@ int getint(int *pn)
     {
         ;
     }
-    if (!is_valid_character(c))
+    if (!is_numeric_char(c))
     {
         return 0;
     }
@@ -71,29 +64,6 @@ int getint(int *pn)
     return c;
 }
 
-bool is_valid_character(char c)
-{
-    return isdigit(c) || c == EOF || is_sign_followed_by_digit(c);
-}
-
-bool is_sign_followed_by_digit(char c)
-{
-    if (!is_sign(c))
-    {
-        return FALSE;
-    }
-
-    char next_c = getch();
-    ungetch(next_c);
-
-    return isdigit(next_c);
-}
-
-bool is_sign(char c)
-{
-    return c == '+' || c == '-';
-}
-
 void print_numbers(int numbers[], int count)
 {
     if (count > 0)
@@ -106,28 +76,4 @@ void print_numbers(int numbers[], int count)
     }
 
     putchar('\n');
-}
-
-#include <stdio.h>
-
-#define BUFSIZE 100
-
-char buf[BUFSIZE];
-int bufp = 0;
-
-int getch(void)
-{
-    return (bufp > 0) ? buf[--bufp] : getchar();
-}
-
-void ungetch(int c)
-{
-    if (bufp >= BUFSIZE)
-    {
-        printf("ungetch too many characters");
-    }
-    else
-    {
-        buf[bufp++] = c;
-    }
 }

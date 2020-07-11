@@ -9,15 +9,15 @@
 
 int main()
 {
-    int previous_char_is_white_space = TRUE;
+    int previous_char_is_whitespace = TRUE;
 
     int c;
     while ((c = getchar()) != EOF)
     {
-        int current_char_is_white_space = c == ' ' || c == '\n' || c == '\t';
-        if (current_char_is_white_space)
+        int current_char_is_whitespace = c == ' ' || c == '\n' || c == '\t';
+        if (current_char_is_whitespace)
         {
-            if (!previous_char_is_white_space)
+            if (!previous_char_is_whitespace)
             {
                 putchar('\n');
             }
@@ -27,6 +27,6 @@ int main()
             putchar(c);
         }
 
-        previous_char_is_white_space = current_char_is_white_space;
+        previous_char_is_whitespace = current_char_is_whitespace;
     }
 }

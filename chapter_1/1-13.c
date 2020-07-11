@@ -22,8 +22,8 @@ int main()
     int c;
     while ((c = getchar()) != EOF)
     {
-        int char_is_white_space = c == ' ' || c == '\n' || c == '\t';
-        if (char_is_white_space)
+        int char_is_whitespace = c == ' ' || c == '\n' || c == '\t';
+        if (char_is_whitespace)
         {
             if (current_length <= MAX_LENGTH)
             {

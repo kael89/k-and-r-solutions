@@ -1,5 +1,5 @@
 /**
- * @description Write versions of the library functions strncpy, strncat, and strncmp, which operate on at most
+ * @description Write versions of the library functions strncpy, strncat, and strncmp,which operate on at most
  * the first n characters of their argument strings.
  * For example, strncpy(s,t,n) copies at most n characters of t to s.
  * Full descriptions are in Appendix B.
@@ -10,7 +10,6 @@
 
 #define MAX_LENGTH 100
 
-int str_len(char *s);
 char *strn_cpy(char *s, char *t, int n);
 
 int main()
@@ -30,7 +29,6 @@ int main()
 char *strn_cpy(char *s, char *t, int n)
 {
     char *result_p = s;
-    int length_t = str_len(t);
 
     while (n > 0 && (*s++ = *t++))
     {
@@ -43,15 +41,4 @@ char *strn_cpy(char *s, char *t, int n)
     }
 
     return result_p;
-}
-
-int str_len(char *s)
-{
-    int i = 0;
-    while (s[i])
-    {
-        i++;
-    }
-
-    return i;
 }

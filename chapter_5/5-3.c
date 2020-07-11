@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 
-#define bool int
 #define MAX_LENGTH 100
 
 char *strcat(char *str1, char *str2);
@@ -30,7 +29,8 @@ char *strcat(char *str1, char *str2)
     {
         str1++;
     }
-    while (*str1++ = *str2++)
+    // -Wparentheses compiler option requires double parentheses here
+    while ((*str1++ = *str2++))
     {
         ;
     }

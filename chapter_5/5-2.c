@@ -1,25 +1,15 @@
 /**
- * @description As written, getint treats a + or - not followed by a digit as a valid representation of zero.
- * Fix it to push such a character back on the input.
+ * @description Write getfloat, the floating-point analog of getint.
+ * What type does getfloat return as its function value? 
  */
 
-#include <ctype.h>
 #include <stdio.h>
+#include <ctype.h>
+#include "../lib.h"
 
-#define bool int
-#define DECIMAL_POINT '.'
-#define FALSE 0
-#define TRUE 1
 #define SIZE 2014
 
-int getch(void);
-void ungetch(int c);
-int getfloat(float *);
-int char_to_digit(char c);
-bool is_decimal_point(char c);
-bool is_valid_character(char c);
-bool is_sign(char c);
-bool is_sign_followed_by_digit(char c);
+int getfloat(float *pn);
 void print_numbers(float numbers[], int count);
 
 int main()
@@ -53,7 +43,7 @@ int getfloat(float *pn)
     {
         ;
     }
-    if (!is_valid_character(c))
+    if (!is_numeric_char(c))
     {
         return 0;
     }
@@ -89,39 +79,6 @@ int getfloat(float *pn)
     return c;
 }
 
-bool is_decimal_point(char c)
-{
-    return c == DECIMAL_POINT;
-}
-
-bool is_valid_character(char c)
-{
-    return isdigit(c) || c == EOF || c == DECIMAL_POINT || is_sign_followed_by_digit(c);
-}
-
-bool is_sign(char c)
-{
-    return c == '+' || c == '-';
-}
-
-bool is_sign_followed_by_digit(char c)
-{
-    if (!is_sign(c))
-    {
-        return FALSE;
-    }
-
-    char next_c = getch();
-    ungetch(next_c);
-
-    return isdigit(next_c);
-}
-
-int char_to_digit(char c)
-{
-    return c - '0';
-}
-
 void print_numbers(float numbers[], int count)
 {
     if (count > 0)
@@ -134,28 +91,4 @@ void print_numbers(float numbers[], int count)
     }
 
     putchar('\n');
-}
-
-#include <stdio.h>
-
-#define BUFSIZE 100
-
-char buf[BUFSIZE];
-int bufp = 0;
-
-int getch(void)
-{
-    return (bufp > 0) ? buf[--bufp] : getchar();
-}
-
-void ungetch(int c)
-{
-    if (bufp >= BUFSIZE)
-    {
-        printf("ungetch too many characters");
-    }
-    else
-    {
-        buf[bufp++] = c;
-    }
 }

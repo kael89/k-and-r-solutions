@@ -4,10 +4,10 @@
  */
 
 #include <stdio.h>
+#include "../lib.h"
 
 #define MAX_LENGTH 100
 
-int str_len(char *s);
 int strend(char *s, char *t);
 
 int main()
@@ -40,15 +40,4 @@ int strend(char *s, char *t)
     }
 
     return *s == *t;
-}
-
-int str_len(char *s)
-{
-    int i = 0;
-    while (s[i])
-    {
-        i++;
-    }
-
-    return i;
 }
