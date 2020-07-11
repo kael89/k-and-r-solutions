@@ -3,7 +3,7 @@
     "prefix": "kr",
     "body": [
       "/**",
-      " * ${1:TODO description}",
+      " * @description ${1:TODO}",
       " */",
       "",
       "#include <stdio.h>",

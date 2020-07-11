@@ -1,5 +1,5 @@
 /**
- * Write a program to print a histogram of the frequencies of different characters in its input.
+ * @description Write a program to print a histogram of the frequencies of different characters in its input.
  */
 
 #include <stdio.h>

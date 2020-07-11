@@ -1,5 +1,5 @@
 /**
- * Write versions of the library functions strncpy, strn_cat, and strncmp, which operate on at most
+ * @description Write versions of the library functions strncpy, strn_cat, and strncmp, which operate on at most
  * the first n characters of their argument strings.
  * For example, strncpy(s,t,n) copies at most n characters of t to s.
  * Full descriptions are in Appendix B.
@@ -48,4 +48,3 @@ char *strn_cat(char *str1, char *str2, int n)
 
     return result_p;
 }
-
