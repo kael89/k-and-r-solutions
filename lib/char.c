@@ -40,3 +40,11 @@ bool is_whitespace(char c)
 {
     return c == ' ' || c == '\t' || c == '\n';
 }
+
+void repeat(char c, int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        putchar(c);
+    }
+}
