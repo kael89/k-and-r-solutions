@@ -4,42 +4,28 @@
 
 #include <stdio.h>
 
-#define PRINTABLE_LINE_LIMIT 80
+#define MAX_LINE 1024
+#define PRINT_THRESHOLD 80
 
 void print_line(char line[]);
 
 int main()
 {
-    int max_line_index = PRINTABLE_LINE_LIMIT - 1;
-    char line_buffer[max_line_index + 1];
+    char line_buffer[MAX_LINE];
 
     char c;
-    int index = 0;
+    int i = 0;
     while ((c = getchar()) != EOF)
     {
+        line_buffer[i++] = c;
         if (c == '\n')
         {
-            if (index > max_line_index)
+            if (i > PRINT_THRESHOLD)
             {
-                putchar('\n');
-            }
-            index = 0;
-            continue;
-        }
-
-        if (index > max_line_index)
-        {
-            putchar(c);
-        }
-        else
-        {
-            line_buffer[index] = c;
-            if (index == max_line_index)
-            {
+                line_buffer[i] = '\0';
                 printf("%s", line_buffer);
             }
+            i = 0;
         }
-
-        index++;
     }
 }
