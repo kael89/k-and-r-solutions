@@ -41,7 +41,6 @@ int getfloat(float *pn)
 
     while (isspace(c = getch()))
     {
-        ;
     }
     if (!is_numeric_char(c))
     {

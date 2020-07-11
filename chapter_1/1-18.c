@@ -17,7 +17,7 @@ int main()
     char line[LINE_BUFFER_LENGTH];
 
     int position = 0;
-    while (read_line(line, LINE_BUFFER_LENGTH) > 0)
+    while (get_line(line, LINE_BUFFER_LENGTH) > 0)
     {
         trim_right(line);
         int length = str_len(line);

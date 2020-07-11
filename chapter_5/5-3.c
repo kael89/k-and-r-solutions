@@ -32,7 +32,6 @@ char *strcat(char *str1, char *str2)
     // -Wparentheses compiler option requires double parentheses here
     while ((*str1++ = *str2++))
     {
-        ;
     }
 
     return result_p;

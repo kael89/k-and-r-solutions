@@ -15,10 +15,6 @@
     ],
     "description": "Basic template for K & R exercises"
   },
-  "New line": {
-    "prefix": "nl",
-    "body": ["putchar('\\n');"]
-  },
   "Print": {
     "prefix": "pr",
     "body": ["printf(\"$1\"$2);"]

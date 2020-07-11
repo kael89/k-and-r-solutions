@@ -36,7 +36,7 @@ bool is_line(char string[])
     return string[str_len(string) - 1] == '\n';
 }
 
-int read_line(char line[], int max_length)
+int get_line(char line[], int max_length)
 {
     int i = 0;
     int c;

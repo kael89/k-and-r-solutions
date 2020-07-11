@@ -41,7 +41,6 @@ int getint(int *pn)
 
     while (isspace(c = getch()))
     {
-        ;
     }
     if (!is_numeric_char(c))
     {

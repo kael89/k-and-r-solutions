@@ -1,6 +1,6 @@
 /**
- * @description Revise the main routine of the longest-line program so it will correctly print the length of
- * arbitrary long input lines, and as much as possible of the text.
+ * @description Revise the main routine of the longest-line program so it will correctly print the
+ * length of arbitrary long input lines, and as much as possible of the text.
  */
 
 #include <stdio.h>
@@ -18,7 +18,7 @@ int main()
     int line_length = 0;
     int subline_length;
     int subline_id = 0;
-    while ((subline_length = read_line(subline, BUFFER_LENGTH)) > 0)
+    while ((subline_length = get_line(subline, BUFFER_LENGTH)) > 0)
     {
         subline_id++;
         line_length += subline_length;
