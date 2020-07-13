@@ -6,18 +6,18 @@
 #include <stdio.h>
 #include "../lib.h"
 
-#define INPUT_BUFFER_LENGTH 8086
-#define LINE_BUFFER_LENGTH 1024
+#define MAX_INPUT_SIZE 8086
+#define MAX_LINE_SIZE 1024
 
 void trim_right(char string[]);
 
 int main()
 {
-    char input[INPUT_BUFFER_LENGTH];
-    char line[LINE_BUFFER_LENGTH];
+    char input[MAX_INPUT_SIZE];
+    char line[MAX_LINE_SIZE];
 
     int position = 0;
-    while (get_line(line, LINE_BUFFER_LENGTH) > 0)
+    while (get_line(line, MAX_LINE_SIZE) > 0)
     {
         trim_right(line);
         int length = str_len(line);
