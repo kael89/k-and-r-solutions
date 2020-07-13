@@ -13,8 +13,9 @@ int main()
     char input[] = "The big brown FOX jumped over";
     squeeze(input, "bor");
     char expected[] = "The ig wn FOX jumped ve";
-
     printf("'%s' should equal: '%s'\n", input, expected);
+
+    return 0;
 }
 
 void squeeze(char s1[], char s2[])
