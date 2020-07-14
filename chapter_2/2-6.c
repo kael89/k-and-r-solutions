@@ -41,7 +41,7 @@ unsigned setbits(unsigned x, int p, int n, unsigned y)
     int keep_right_bits_mask = ~(~0 << n);
     int left_shift = (p - n + 1);
 
-    unsigned replacement = (y & keep_right_bits_mask) << left_shift;
-    unsigned removal_mask = ~(keep_right_bits_mask << left_shift);
+    int replacement = (y & keep_right_bits_mask) << left_shift;
+    int removal_mask = ~(keep_right_bits_mask << left_shift);
     return (x & removal_mask) | replacement;
 }
