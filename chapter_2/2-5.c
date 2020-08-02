@@ -15,17 +15,9 @@ int any(char s1[], char s2[]);
 int main()
 {
     print_test("The big brown FOX jumped over", "rob", 4);
-    printf("\n");
     print_test("The big brown FOX jumped over", "OX", 15);
 
     return 0;
-}
-
-void print_test(char input[], char target[], int expected)
-{
-    printf("Input: '%s'\n", input);
-    printf("Search chars: '%s'\n", target);
-    printf("Result: %d, Expected: %d\n", any(input, target), expected);
 }
 
 int any(char s1[], char s2[])
@@ -48,4 +40,11 @@ int any(char s1[], char s2[])
     }
 
     return pos;
+}
+
+void print_test(char input[], char search[], int expected)
+{
+    printf("Input: %s, Search: %s", input, search);
+    test_equal_ints(any(input, search), expected);
+    printf("\n");
 }

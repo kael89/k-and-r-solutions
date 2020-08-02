@@ -7,27 +7,29 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void print_test(char hex[], char expected[]);
+void print_test(char hex[], int expected);
 int htoi(char s[]);
 int digit_to_int(char digit);
 
 int main()
 {
-    print_test("0x9", "9");
-    print_test("0X9", "9");
-    print_test("0", "0");
-    print_test("9", "9");
-    print_test("A", "10");
-    print_test("F", "15");
-    print_test("99", "153");
-    print_test("FF", "255");
+    print_test("0x9", 9);
+    print_test("0X9", 9);
+    print_test("0", 0);
+    print_test("9", 9);
+    print_test("A", 10);
+    print_test("F", 15);
+    print_test("99", 153);
+    print_test("FF", 255);
 
     return 0;
 }
 
-void print_test(char hex[], char expected[])
+void print_test(char hex[], int expected)
 {
-    printf("Hex: %6s, Dec: %4d, Expected: %4s\n", hex, htoi(hex), expected);
+    printf("Input: %6s", hex);
+    test_equal_ints(htoi(hex), expected);
+    printf("\n");
 }
 
 int htoi(char s[])

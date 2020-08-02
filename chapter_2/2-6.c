@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-#define MAX_BITS 15
+#define MAX_BITS 32
 
 void print_test(unsigned x, int p, int n, unsigned y, unsigned expected);
 unsigned setbits(unsigned x, int p, int n, unsigned y);
@@ -33,7 +33,9 @@ void print_test(unsigned x, int p, int n, unsigned y, unsigned expected)
     get_bits(setbits(x, p, n, y), result_bits);
     get_bits(expected, expected_bits);
 
-    printf("x: %10s, p: %d, n: %d, y: %10s, Results: %10s, Expected: %10s\n", x_bits, p, n, y_bits, result_bits, expected_bits);
+    printf("x: %10s, p: %d, n: %d, y: %10s", x_bits, p, n, y_bits);
+    test_equal_strings(result_bits, expected_bits);
+    printf("\n");
 }
 
 unsigned setbits(unsigned x, int p, int n, unsigned y)

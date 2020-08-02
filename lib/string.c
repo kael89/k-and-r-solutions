@@ -71,3 +71,17 @@ void trim_right(char string[])
         string[i] = '\0';
     }
 }
+
+int str_cmp(char s1[], char s2[])
+{
+    int i, j;
+    for (i = 0, j = 0; (s1[i] == s2[j] && s1[i] != '\0'); i++, j++)
+    {
+    }
+    return s2[i] - s1[j];
+}
+
+bool str_equals(char s1[], char s2[])
+{
+    return str_cmp(s1, s2) == 0;
+}

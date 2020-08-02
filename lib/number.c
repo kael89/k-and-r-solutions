@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-#define MAX_BITS 63
+#define MAX_BITS 33
 
-void get_bits(int num, char result[])
+void get_bits(unsigned int num, char result[])
 {
     char bits_reverse[MAX_BITS];
     int i = 0;
