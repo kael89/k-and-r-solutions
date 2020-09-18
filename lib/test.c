@@ -31,7 +31,21 @@ void test_equal_ints(int results, int expected)
     else
     {
         char str[BUFFER_LENGTH];
-        sprintf(str, " ❌\n\tResults: %d, Expected: %d", results, expected);
+        sprintf(str, " ❌\n\tReceived: %d, Expected: %d", results, expected);
+        log_error(str);
+    }
+}
+
+void test_equal_chars(char results, char expected)
+{
+    if (results == expected)
+    {
+        log_success(" ✔");
+    }
+    else
+    {
+        char str[BUFFER_LENGTH];
+        sprintf(str, " ❌\n\tReceived: %c, Expected: %c", results, expected);
         log_error(str);
     }
 }
@@ -45,7 +59,7 @@ void test_equal_strings(char results[], char expected[])
     else
     {
         char str[BUFFER_LENGTH];
-        sprintf(str, " ❌\n\tResults: %s, Expected: %s", results, expected);
+        sprintf(str, " ❌\n\tReceived: %s, Expected: %s", results, expected);
         log_error(str);
     }
 }
