@@ -7,21 +7,23 @@
 #include "../lib.h"
 
 int lower(int c);
-void print_test(char input, char expected);
+bool test(char input, char expected);
 
 int main()
 {
-    print_test('A', 'a');
-    print_test('a', 'a');
-    print_test('Z', 'z');
-    print_test('z', 'z');
+    bool success = TRUE;
+    success &= test('A', 'a');
+    success &= test('a', 'a');
+    success &= test('Z', 'z');
+    success &= test('z', 'z');
+
+    return success;
 }
 
-void print_test(char input, char expected)
+bool test(char input, char expected)
 {
-    printf("Input: %c, Expected: %c", input, expected);
-    test_equal_chars(lower(input), expected);
-    printf("\n");
+    char description[2] = {input, '\0'};
+    return test_equal_chars(description, lower(input), expected);
 }
 
 int lower(int c)

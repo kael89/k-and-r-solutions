@@ -43,17 +43,24 @@ bool test_equal_ints(char description[], int received, int expected)
     }
 }
 
-void test_equal_chars(char results, char expected)
+bool test_equal_chars(char description[], char received, char expected)
 {
-    if (results == expected)
+    if (received == expected)
     {
         log_success(" ✔");
+        printf(" %s\n", description);
+        return TRUE;
     }
     else
     {
-        char str[BUFFER_LENGTH];
-        sprintf(str, " ❌\n\tReceived: %c, Expected: %c", results, expected);
-        log_error(str);
+        log_error("❌");
+        printf(" %s\n", description);
+        log_error("   Received: ");
+        printf("%c", received);
+        log_success("\n   Expected: ");
+        printf("%c", expected);
+        printf("\n");
+        return FALSE;
     }
 }
 
