@@ -7,3 +7,4 @@ int get_line(char line[], int max_length);
 int str_cmp(char s1[], char s2[]);
 int str_len(char string[]);
 bool str_equals(char s1[], char s2[]);
+void print_int_array(int integers[], int length);

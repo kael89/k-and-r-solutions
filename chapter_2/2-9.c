@@ -8,8 +8,8 @@ in x. Explain why. Use this observation to write a faster version of bitcount.
 
 #define MAX_BITS 32
 
-void print_test(unsigned input, int expected);
 int bitcount(unsigned x);
+void print_test(unsigned input, int expected);
 
 int main()
 {
