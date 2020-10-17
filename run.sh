@@ -15,10 +15,14 @@ function print_exer_name() {
     log_success "* $chapter-$exer.c"
 }
 
-function run_all() {
-    log_success "Running all exercises..."
+function run_many() {
+    if [[ "$#" > 0 ]]; then
+        log_success "Chapter $1"
+    else
+        log_success "All chapters"
+    fi
 
-    local chapters=$(ls | grep chapter_ | sed -e 's/chapter_\(.*\)/\1/' | sort -n)
+    local chapters=$(ls | grep chapter_$1 | sed -e 's/chapter_\(.*\)/\1/' | sort -n)
     local passed=0
     local skipped=0
     local failed=0
@@ -80,8 +84,8 @@ function run_one() {
     return $result
 }
 
-if [ "$#" = 0 ]; then
-    run_all
+if [[ "$#" < 2 ]]; then
+    run_many $1
 fi
 
 print_exer_name $1 $2
