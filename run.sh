@@ -72,8 +72,9 @@ function run_one() {
         lib/char.c lib/number.c lib/stack.c lib/string.c lib/test.c \
         -lm
 
-    ./$exec_path
+    output=$(./$exec_path)
     result=$?
+    echo "$(echo "$output" | sed -e 's/\(.*\)/  \1/')"
 
     rm $exec_path
     return $result
