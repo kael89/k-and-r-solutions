@@ -1,5 +1,6 @@
 /**
- * @description Write a program to count blanks, tabs, and newlines. 
+ * @description Write a program to count blanks, tabs, and newlines.
+ * @interactive
  */
 
 #include <stdio.h>
