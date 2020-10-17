@@ -54,12 +54,15 @@ void test_equal_strings(char results[], char expected[])
 {
     if (str_equals(results, expected))
     {
-        log_success(" ✔");
+        log_success("✔");
+        printf(" %s\n", expected);
     }
     else
     {
-        char str[BUFFER_LENGTH];
-        sprintf(str, " ❌\n\tReceived: %s, Expected: %s", results, expected);
-        log_error(str);
+        log_error("❌ Received: ");
+        printf("%s", results);
+        log_success("\n   Expected: ");
+        printf("%s", expected);
+        printf("\n");
     }
 }

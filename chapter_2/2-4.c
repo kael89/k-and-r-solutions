@@ -12,7 +12,6 @@ void print_test(char input[], char search[], char expected[]);
 int main()
 {
     print_test("The big brown FOX jumped over", "bor", "The ig wn FOX jumped ve");
-
     return 0;
 }
 
