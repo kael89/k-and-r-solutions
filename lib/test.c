@@ -22,17 +22,24 @@ void log_error(char message[])
     log_with_color(message, ANSI_COLOR_RED);
 }
 
-void test_equal_ints(int results, int expected)
+bool test_equal_ints(char description[], int received, int expected)
 {
-    if (results == expected)
+    if (received == expected)
     {
         log_success(" ✔");
+        printf(" %s\n", description);
+        return TRUE;
     }
     else
     {
-        char str[BUFFER_LENGTH];
-        sprintf(str, " ❌\n\tReceived: %d, Expected: %d", results, expected);
-        log_error(str);
+        log_error("❌");
+        printf(" %s\n", description);
+        log_error("   Received: ");
+        printf("%d", received);
+        log_success("\n   Expected: ");
+        printf("%d", expected);
+        printf("\n");
+        return FALSE;
     }
 }
 

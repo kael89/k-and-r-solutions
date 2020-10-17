@@ -1,35 +1,34 @@
 /**
  * @description Write a function htoi(s), which converts a string of hexadecimal digits
  * (including an optional 0x or 0X) into its equivalent integer value. The allowable digits are 0
- * through 9, a through f, and A through F. 
+ * through 9, a through f, and A through F.
  */
 
 #include <stdio.h>
 #include "../lib.h"
 
-void print_test(char hex[], int expected);
+bool test(char hex[], int expected);
 int htoi(char s[]);
 int digit_to_int(char digit);
 
 int main()
 {
-    print_test("0x9", 9);
-    print_test("0X9", 9);
-    print_test("0", 0);
-    print_test("9", 9);
-    print_test("A", 10);
-    print_test("F", 15);
-    print_test("99", 153);
-    print_test("FF", 255);
+    bool success = TRUE;
+    success &= test("0x9", 9);
+    success &= test("0X9", 9);
+    success &= test("0", 0);
+    success &= test("9", 9);
+    success &= test("A", 10);
+    success &= test("F", 15);
+    success &= test("99", 153);
+    success &= test("FF", 255);
 
-    return 0;
+    return success ? 0 : 1;
 }
 
-void print_test(char hex[], int expected)
+bool test(char hex[], int expected)
 {
-    printf("Input: %6s", hex);
-    test_equal_ints(htoi(hex), expected);
-    printf("\n");
+    return test_equal_ints(hex, htoi(hex), expected);
 }
 
 int htoi(char s[])

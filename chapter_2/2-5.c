@@ -9,15 +9,19 @@
 
 #define NOT_FOUND -1
 
-void print_test(char input[], char target[], int expected);
+bool test(char input[], char target[], int expected);
 int any(char s1[], char s2[]);
 
 int main()
 {
-    print_test("The big brown FOX jumped over", "rob", 4);
-    print_test("The big brown FOX jumped over", "OX", 15);
+    char input[] = "The big brown FOX jumped over";
+    printf("Input: %s\n", input);
 
-    return 0;
+    bool success = TRUE;
+    success &= test(input, "rob", 4);
+    success &= test(input, "OX", 15);
+
+    return success ? 0 : 1;
 }
 
 int any(char s1[], char s2[])
@@ -42,9 +46,7 @@ int any(char s1[], char s2[])
     return pos;
 }
 
-void print_test(char input[], char search[], int expected)
+bool test(char input[], char search[], int expected)
 {
-    printf("Input: %s, Search: %s", input, search);
-    test_equal_ints(any(input, search), expected);
-    printf("\n");
+    return test_equal_ints(search, any(input, search), expected);
 }

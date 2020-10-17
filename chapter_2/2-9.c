@@ -9,30 +9,31 @@
 #define MAX_BITS 32
 
 int bitcount(unsigned x);
-void print_test(unsigned input, int expected);
+bool test(unsigned input, int expected);
 
 int main()
 {
-    print_test(0b0, 0);
-    print_test(0b1, 1);
-    print_test(0b10, 1);
-    print_test(0b11, 2);
-    print_test(0b1000, 1);
-    print_test(0b1001, 2);
-    print_test(0b1010, 2);
-    print_test(0b1110, 3);
-    print_test(0b1011, 3);
-    print_test(0b1111, 4);
+    bool success = TRUE;
+    success &= test(0b0, 0);
+    success &= test(0b1, 1);
+    success &= test(0b10, 1);
+    success &= test(0b11, 2);
+    success &= test(0b1000, 1);
+    success &= test(0b1001, 2);
+    success &= test(0b1010, 2);
+    success &= test(0b1110, 3);
+    success &= test(0b1011, 3);
+    success &= test(0b1111, 4);
+
+    return success ? 0 : 1;
 }
 
-void print_test(unsigned input, int expected)
+bool test(unsigned input, int expected)
 {
     char bits[MAX_BITS];
 
     get_bits(input, bits);
-    printf("Input: %4s, Expected: %d", bits, expected);
-    test_equal_ints(bitcount(input), expected);
-    printf("\n");
+    return test_equal_ints(bits, bitcount(input), expected);
 }
 
 int bitcount(unsigned x)
