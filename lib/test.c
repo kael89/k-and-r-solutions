@@ -50,19 +50,23 @@ void test_equal_chars(char results, char expected)
     }
 }
 
-void test_equal_strings(char results[], char expected[])
+bool test_equal_strings(char description[], char received[], char expected[])
 {
-    if (str_equals(results, expected))
+    if (str_equals(received, expected))
     {
-        log_success("✔");
-        printf(" %s\n", expected);
+        log_success("✔ ");
+        printf(" %s\n", description);
+        return TRUE;
     }
     else
     {
-        log_error("❌ Received: ");
-        printf("%s", results);
+        log_error("❌");
+        printf(" %s\n", description);
+        log_error("   Received: ");
+        printf("%s", received);
         log_success("\n   Expected: ");
         printf("%s", expected);
         printf("\n");
+        return FALSE;
     }
 }

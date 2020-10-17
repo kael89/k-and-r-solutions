@@ -8,21 +8,24 @@
 
 #define MAX_BITS 33
 
-void print_test(unsigned x, int n, unsigned expected);
+bool test(unsigned x, int n, unsigned expected);
 unsigned rightrot(unsigned x, int n);
 
 int main()
 {
-    print_test(0b0, 0, 0b0);
-    print_test(0b0, 1, 0);
-    print_test(0b1, 1, 0b10000000000000000000000000000000);
-    print_test(0b1, 2, 0b1000000000000000000000000000000);
-    print_test(0b1001, 2, 0b1000000000000000000000000000010);
-    print_test(0b11000, 2, 0b110);
-    print_test(0b10101000, 3, 0b10101);
+    bool success = TRUE;
+    success &= test(0b0, 0, 0b0);
+    success &= test(0b0, 1, 0);
+    success &= test(0b1, 1, 0b10000000000000000000000000000000);
+    success &= test(0b1, 2, 0b1000000000000000000000000000000);
+    success &= test(0b1001, 2, 0b1000000000000000000000000000010);
+    success &= test(0b11000, 2, 0b110);
+    success &= test(0b10101000, 3, 0b10101);
+
+    return success ? 0 : 1;
 }
 
-void print_test(unsigned x, int n, unsigned expected)
+bool test(unsigned x, int n, unsigned expected)
 {
     char x_bits[MAX_BITS];
     char result_bits[MAX_BITS];
@@ -32,9 +35,9 @@ void print_test(unsigned x, int n, unsigned expected)
     get_bits(rightrot(x, n), result_bits);
     get_bits(expected, expected_bits);
 
-    printf("x: %10s, n: %d", x_bits, n);
-    test_equal_strings(result_bits, expected_bits);
-    printf("\n");
+    char description[50];
+    sprintf(description, "x: %8s, n: %d", x_bits, n);
+    return test_equal_strings(description, result_bits, expected_bits);
 }
 
 unsigned rightrot(unsigned x, int n)

@@ -9,17 +9,18 @@ characters.
 #include "../lib.h"
 
 void escape(char s[], char t[]);
-void print_test(char input[], char expected[]);
+bool test(char description[], char input[], char expected[]);
 
 int main()
 {
-    // print_test("", "");
-    print_test("A", "A");
-    print_test("A\ttab", "A\\ttab");
-    // print_test("Includes\ttab", "Includes\\ttab");
-    // print_test("Includes\nnewline", "Includes\\nnewline");
-    // print_test("Includes\tmixed\n\ncombination\tof escape\tchars", "Includes\\tmixed\\n\\ncombination\\tof escape\\tchars");
-    return 0;
+    bool success = TRUE;
+    success &= test("empty string", "", "");
+    success &= test("single letter", "A", "A");
+    success &= test("tab", "A\ttab", "A\\ttab");
+    success &= test("new line", "Includes\nnewline", "Includes\\nnewline");
+    success &= test("mixed", "Includes\tmixed\n\ncombination\tof escape\tchars", "Includes\\tmixed\\n\\ncombination\\tof escape\\tchars");
+
+    return success ? 0 : 1;
 }
 
 void escape(char s[], char t[])
@@ -47,9 +48,9 @@ void escape(char s[], char t[])
     t[j] = '\0';
 }
 
-void print_test(char input[], char expected[])
+bool test(char description[], char input[], char expected[])
 {
     char result[100];
     escape(input, result);
-    test_equal_strings(result, expected);
+    return test_equal_strings(description, result, expected);
 }

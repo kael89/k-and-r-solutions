@@ -7,12 +7,14 @@
 #include "../lib.h"
 
 void squeeze(char s1[], char s2[]);
-void print_test(char input[], char search[], char expected[]);
+bool test(char input[], char search[], char expected[]);
 
 int main()
 {
-    print_test("The big brown FOX jumped over", "bor", "The ig wn FOX jumped ve");
-    return 0;
+    char input[] = "The big brown FOX jumped over";
+    printf("Input: %s\n", input);
+    bool success = test(input, "bor", "The ig wn FOX jumped ve");
+    return success ? 0 : 1;
 }
 
 void squeeze(char s1[], char s2[])
@@ -38,13 +40,10 @@ void squeeze(char s1[], char s2[])
     s1[j] = '\0';
 }
 
-void print_test(char input[], char search[], char expected[])
+bool test(char input[], char search[], char expected[])
 {
     char result[100];
     copy_str(result, input);
-
     squeeze(result, search);
-    printf("Input: %s, Search: %s", input, search);
-    test_equal_strings(result, expected);
-    printf("\n");
+    return test_equal_strings(search, result, expected);
 }
