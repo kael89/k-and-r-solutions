@@ -1,6 +1,6 @@
 /**
  * @description Write a function rightrot(x,n) that returns the value of the integer x rotated
- * to the right by n positions. 
+ * to the right by n positions.
  */
 
 #include <stdio.h>
@@ -36,7 +36,7 @@ bool test(unsigned x, int n, unsigned expected)
     get_bits(expected, expected_bits);
 
     char description[50];
-    sprintf(description, "x: %8s, n: %d", x_bits, n);
+    sprintf(description, "x: %s, n: %d", x_bits, n);
     return test_equal_strings(description, result_bits, expected_bits);
 }
 

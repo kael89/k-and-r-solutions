@@ -1,6 +1,6 @@
 /**
  * @description Write a function setbits(x,p,n,y) that returns x with the n bits that begin at
- * position p set to the rightmost n bits of y, leaving the other bits unchanged. 
+ * position p set to the rightmost n bits of y, leaving the other bits unchanged.
  */
 
 #include <stdio.h>
@@ -37,7 +37,7 @@ bool test(unsigned x, int p, int n, unsigned y, unsigned expected)
     get_bits(expected, expected_bits);
 
     char description[50];
-    sprintf(description, "x: %8s, p: %d, n: %d, y: %10s", x_bits, p, n, y_bits);
+    sprintf(description, "x: %s, p: %d, n: %d, y: %s", x_bits, p, n, y_bits);
     return test_equal_strings(description, result_bits, expected_bits);
 }
 
