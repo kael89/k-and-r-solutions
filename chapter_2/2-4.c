@@ -42,7 +42,7 @@ void squeeze(char s1[], char s2[])
 
 bool test(char input[], char search[], char expected[])
 {
-    char result[100];
+    char result[100] = "";
     copy_str(result, input);
     squeeze(result, search);
     return test_equal_strings(search, result, expected);
