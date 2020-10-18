@@ -25,14 +25,13 @@ int main()
 void reverse(char s[])
 {
 
-    int len;
-    len = str_len(s);
+    int len = str_len(s);
     if (s[len - 1] == '\n')
     {
         len--;
     }
 
-    for (int i = 0, j = len - 1; i < (len - 1) / 2; i++, j--)
+    for (int i = 0, j = len - 1; i <= (len - 1) / 2; i++, j--)
     {
         char temp = s[i];
         s[i] = s[j];
