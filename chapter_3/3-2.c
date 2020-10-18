@@ -8,6 +8,8 @@ characters.
 #include <stdio.h>
 #include "../lib.h"
 
+#define MAX_LENGTH 128
+
 void escape(char s[], char t[]);
 bool test(char description[], char input[], char expected[]);
 
@@ -16,9 +18,14 @@ int main()
     bool success = TRUE;
     success &= test("empty string", "", "");
     success &= test("single letter", "A", "A");
-    success &= test("tab", "A\ttab", "A\\ttab");
-    success &= test("new line", "Includes\nnewline", "Includes\\nnewline");
-    success &= test("mixed", "Includes\tmixed\n\ncombination\tof escape\tchars", "Includes\\tmixed\\n\\ncombination\\tof escape\\tchars");
+    success &= test("tab", "\t", "\\t");
+    success &= test("tab followed by chars", "A\tword", "A\\tword");
+    success &= test("tab followed by 't'", "A\ttab", "A\\ttab");
+    success &= test("new line", "\n", "\\n");
+    success &= test("new line follwed by chars", "Includes\nanother line", "Includes\\nanother line");
+    success &= test("new line follwed by 'n'", "Includes\nnew line", "Includes\\nnew line");
+    success &= test("left slash", "\\", "\\");
+    success &= test("mixed", "Includes\tmixed\n\ncombination\tof \\escape\tchars\\", "Includes\\tmixed\\n\\ncombination\\tof \\escape\\tchars\\");
 
     return success ? 0 : 1;
 }
@@ -48,9 +55,36 @@ void escape(char s[], char t[])
     t[j] = '\0';
 }
 
+void escape_reverse(char s[], char t[])
+{
+    int i = 0;
+    int j = 0;
+    char c;
+
+    while ((c = s[i++]) != '\0')
+    {
+        if (c == '\\' && (s[i] == 't' || s[i] == 'n'))
+        {
+            c = s[i] == 't' ? '\t' : '\n';
+            i++;
+        }
+        t[j++] = c;
+    }
+    t[j] = '\0';
+}
+
 bool test(char description[], char input[], char expected[])
 {
-    char result[100];
-    escape(input, result);
-    return test_equal_strings(description, result, expected);
+    char result_escape[MAX_LENGTH];
+    char result_reverse[MAX_LENGTH];
+    char description_reverse[MAX_LENGTH];
+    sprintf(description_reverse, "%s - reverse", description);
+
+    bool success = TRUE;
+    escape(input, result_escape);
+    success &= test_equal_strings(description, result_escape, expected);
+    escape_reverse(expected, result_reverse);
+    success &= test_equal_strings(description_reverse, result_reverse, input);
+
+    return success;
 }
