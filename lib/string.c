@@ -85,17 +85,3 @@ bool str_equals(char s1[], char s2[])
 {
     return str_cmp(s1, s2) == 0;
 }
-
-void print_int_array(int integers[], int length)
-{
-    printf("{");
-    for (int i = 0; i < length; i++)
-    {
-        printf(" %d", integers[i]);
-        if (i != length - 1)
-        {
-            putchar(',');
-        }
-    }
-    printf(" }");
-}

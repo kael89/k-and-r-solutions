@@ -17,7 +17,7 @@ int main()
     success &= test('Z', 'z');
     success &= test('z', 'z');
 
-    return success;
+    return success ? 0 : 1;
 }
 
 bool test(char input, char expected)

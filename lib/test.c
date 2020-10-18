@@ -1,86 +1,88 @@
 #include <stdio.h>
+#include "output.h"
 #include "string.h"
 
-#define ANSI_COLOR_GREEN "\033[0;32m"
-#define ANSI_COLOR_RED "\033[0;31m"
-#define ANSI_COLOR_DEFAULT "\033[0m"
-
-#define BUFFER_LENGTH 1024
-
-void log_with_color(char message[], char ansi_color[])
+typedef enum
 {
-    printf("%s%s%s", ansi_color, message, ANSI_COLOR_DEFAULT);
+    CHAR,
+    INT,
+    STRING,
+} type;
+
+void print_unknown_type()
+{
+    print_error("Not supported type - must be one of CHAR, INT, STRING\n");
 }
 
-void log_success(char message[])
+bool compare_typed_values(type t, void *a_p, void *b_p)
 {
-    log_with_color(message, ANSI_COLOR_GREEN);
+    switch (t)
+    {
+    case CHAR:
+        return *((char *)a_p) == *((char *)b_p);
+    case INT:
+        return *((int *)a_p) == *((int *)b_p);
+    case STRING:
+        return str_equals((char *)a_p, (char *)b_p);
+    default:
+        print_unknown_type();
+        return FALSE;
+    }
 }
 
-void log_error(char message[])
+void print_typed_value(type t, void *value_p)
 {
-    log_with_color(message, ANSI_COLOR_RED);
+    switch (t)
+    {
+    case CHAR:
+        printf("%c", *((char *)value_p));
+        break;
+    case INT:
+        printf("%d", *((int *)value_p));
+        break;
+    case STRING:
+        printf("%s", (char *)value_p);
+        break;
+    default:
+        print_unknown_type();
+        break;
+    }
+}
+
+bool test_equal(type t, char description[], void *received_p, void *expected_p)
+{
+    bool are_equal = compare_typed_values(t, received_p, expected_p);
+
+    if (are_equal)
+    {
+        print_success(" ✔");
+        printf(" %s\n", description);
+        return TRUE;
+    }
+    else
+    {
+        print_error("❌");
+        printf(" %s\n", description);
+        print_error("   Received: ");
+        print_typed_value(t, received_p);
+        print_success("\n   Expected: ");
+        print_typed_value(t, expected_p);
+        printf("\n");
+        return FALSE;
+    }
 }
 
 bool test_equal_ints(char description[], int received, int expected)
 {
-    if (received == expected)
-    {
-        log_success(" ✔");
-        printf(" %s\n", description);
-        return TRUE;
-    }
-    else
-    {
-        log_error("❌");
-        printf(" %s\n", description);
-        log_error("   Received: ");
-        printf("%d", received);
-        log_success("\n   Expected: ");
-        printf("%d", expected);
-        printf("\n");
-        return FALSE;
-    }
+    return test_equal(INT, description, &received, &expected);
 }
 
 bool test_equal_chars(char description[], char received, char expected)
 {
-    if (received == expected)
-    {
-        log_success(" ✔");
-        printf(" %s\n", description);
-        return TRUE;
-    }
-    else
-    {
-        log_error("❌");
-        printf(" %s\n", description);
-        log_error("   Received: ");
-        printf("%c", received);
-        log_success("\n   Expected: ");
-        printf("%c", expected);
-        printf("\n");
-        return FALSE;
-    }
+    return test_equal(CHAR, description, &received, &expected);
 }
 
 bool test_equal_strings(char description[], char received[], char expected[])
 {
-    if (str_equals(received, expected))
-    {
-        log_success("✔ ");
-        printf(" %s\n", description);
-        return TRUE;
-    }
-    else
-    {
-        log_error("❌");
-        printf(" %s\n", description);
-        log_error("   Received: ");
-        printf("%s", received);
-        log_success("\n   Expected: ");
-        printf("%s", expected);
-        printf("\n");
-        return FALSE;
-    }
+    return test_equal(STRING, description, received, expected);
 }

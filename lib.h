@@ -3,4 +3,5 @@
 #include "lib/number.h"
 #include "lib/stack.h"
 #include "lib/string.h"
+#include "lib/output.h"
 #include "lib/test.h"

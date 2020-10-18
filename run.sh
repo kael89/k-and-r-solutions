@@ -73,7 +73,7 @@ function print_results() {
 function run_one() {
     local exec_path="out"
     gcc -Wall -o $exec_path $1 \
-        lib/char.c lib/number.c lib/stack.c lib/string.c lib/test.c \
+        lib/char.c lib/number.c lib/output.c lib/stack.c lib/string.c lib/test.c \
         -lm
 
     output=$(./$exec_path)
