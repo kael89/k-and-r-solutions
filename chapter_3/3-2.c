@@ -8,8 +8,6 @@ characters.
 #include <stdio.h>
 #include "../lib.h"
 
-#define MAX_LENGTH 128
-
 void escape(char s[], char t[]);
 bool test(char description[], char input[], char expected[]);
 
@@ -75,9 +73,9 @@ void escape_reverse(char s[], char t[])
 
 bool test(char description[], char input[], char expected[])
 {
-    char result_escape[MAX_LENGTH];
-    char result_reverse[MAX_LENGTH];
-    char description_reverse[MAX_LENGTH];
+    char result_escape[100];
+    char result_reverse[100];
+    char description_reverse[100] = "";
     sprintf(description_reverse, "%s - reverse", description);
 
     bool success = TRUE;

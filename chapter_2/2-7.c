@@ -35,7 +35,7 @@ bool test(unsigned x, int p, int n, unsigned expected)
     get_bits(invert(x, p, n), result_bits);
     get_bits(expected, expected_bits);
 
-    char description[50];
+    char description[50] = "";
     sprintf(description, "x: %s, p: %d, n: %d", x_bits, p, n);
     return test_equal_strings(description, result_bits, expected_bits);
 }

@@ -73,7 +73,7 @@ bool test(int v[], int n, int test_data[][2], int test_data_len)
     {
         int search = test_data[i][0];
         int expected = test_data[i][1];
-        char description[50];
+        char description[50] = "";
         sprintf(description, "%2d", search);
         success &= test_equal_ints(description, binsearch_original(search, v, n), expected);
     }
