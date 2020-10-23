@@ -17,30 +17,30 @@ int main()
     bool success = TRUE;
 
     printf("Hex values\n");
-    test(0, 16, "0");
-    test(1, 16, "1");
-    test(10, 16, "A");
-    test(15, 16, "F");
-    test(16, 16, "10");
-    test(26, 16, "1A");
-    test(31, 16, "1F");
+    success &= test(0, 16, "0");
+    success &= test(1, 16, "1");
+    success &= test(10, 16, "A");
+    success &= test(15, 16, "F");
+    success &= test(16, 16, "10");
+    success &= test(26, 16, "1A");
+    success &= test(31, 16, "1F");
 
     printf("Sign\n");
-    test(-0, 16, "0");
-    test(+0, 16, "0");
-    test(-1, 16, "-1");
-    test(+1, 16, "1");
+    success &= test(-0, 16, "0");
+    success &= test(+0, 16, "0");
+    success &= test(-1, 16, "-1");
+    success &= test(+1, 16, "1");
 
     printf("Other bases\n");
-    test(8, 8, "10");
-    test(9, 8, "11");
-    test(8, 9, "8");
-    test(9, 9, "10");
-    test(10, 9, "11");
-    test(25, 26, "P");
-    test(26, 26, "10");
-    test(27, 26, "11");
-    test(649, 26, "OP");
+    success &= test(8, 8, "10");
+    success &= test(9, 8, "11");
+    success &= test(8, 9, "8");
+    success &= test(9, 9, "10");
+    success &= test(10, 9, "11");
+    success &= test(25, 26, "P");
+    success &= test(26, 26, "10");
+    success &= test(27, 26, "11");
+    success &= test(649, 26, "OP");
 
     return success ? 0 : 1;
 }
