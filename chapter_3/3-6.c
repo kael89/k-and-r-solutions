@@ -21,6 +21,9 @@ int main()
     success &= test(10, 0, "10");
     success &= test(999, 0, "999");
     success &= test(1234, 0, "1234");
+    success &= test(-0, 0, "0");
+    success &= test(-1, 0, "-1");
+    success &= test(-1234, 0, "-1234");
 
     printf("Padding\n");
     success &= test(0, 2, "00");
