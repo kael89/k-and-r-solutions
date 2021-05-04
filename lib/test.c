@@ -17,9 +17,11 @@ void print_unknown_type()
     print_error("Not supported type - must be one of CHAR, DOUBLE, INT, STRING\n");
 }
 
-void print_unknown_array_type()
+void print_unknown_array_type(char *fn_name)
 {
-    print_error("Not supported array type - must be one of INT[]\n");
+    char error[256] = "";
+    sprintf(error, "%s: Not supported array type - must be one of DOUBLE[], INT[]\n", fn_name);
+    print_error(error);
 }
 
 bool compare_typed_values(type t, void *a_p, void *b_p)
@@ -56,8 +58,17 @@ bool compare_typed_arrays(type t, void *a_p, void *b_p, int len)
             }
         }
         return TRUE;
+    case DOUBLE:;
+        for (int i = 0; i < len; i++)
+        {
+            if (((double *)a_p)[i] != ((double *)b_p)[i])
+            {
+                return FALSE;
+            }
+        }
+        return TRUE;
     default:
-        print_unknown_array_type();
+        print_unknown_array_type("compare_typed_arrays");
         return FALSE;
     }
 }
@@ -94,12 +105,22 @@ void print_typed_array(type t, void *arr_p, int len)
             printf("%d", ((int *)arr_p)[i]);
             if (i != len - 1)
             {
-                printf(",");
+                printf(", ");
+            }
+        }
+        break;
+    case DOUBLE:;
+        for (int i = 0; i < len; i++)
+        {
+            printf("%.9g", ((double *)arr_p)[i]);
+            if (i != len - 1)
+            {
+                printf(", ");
             }
         }
         break;
     default:
-        print_unknown_array_type();
+        print_unknown_array_type("print_typed_array");
         break;
     }
 }
@@ -158,6 +179,11 @@ bool test_equal_chars(char description[], char received, char expected)
 bool test_equal_doubles(char description[], double received, double expected)
 {
     return test_equal(DOUBLE, description, &received, &expected);
+}
+
+bool test_equal_double_arrays(char description[], double received[], int received_len, double expected[], int expected_len)
+{
+    return test_equal_arrays(DOUBLE, description, received, received_len, expected, expected_len);
 }
 
 bool test_equal_ints(char description[], int received, int expected)
