@@ -4,91 +4,85 @@
  * @interactive
  */
 
-#include <stdio.h>
 #include <ctype.h>
+#include <stdio.h>
 #include "../lib.h"
 
-#define SIZE 2014
+#define DECIMAL_POINT '.'
 
 int getfloat(float *pn);
-void print_numbers(float numbers[], int count);
 
 int main()
 {
-    float array[SIZE];
+    float n;
+    int result;
 
-    int count = 0;
-    for (int i = 0; i < SIZE; i++)
+    bool non_int_input = FALSE;
+    do
     {
-        int result = getfloat(&array[count]);
-        if (result == EOF)
+        result = getfloat(&n);
+        if (result == 0)
         {
-            break;
+            if (!non_int_input)
+            {
+                non_int_input = TRUE;
+                printf("\nNon float: ");
+            }
+            printf("%c", getch());
         }
-        if (result > 0)
+        else if (result != EOF)
         {
-            count++;
+            non_int_input = FALSE;
+            printf("\nFloat: %g", n);
         }
-    }
-
-    print_numbers(array, count);
-    return 0;
+    } while (result != EOF);
 }
 
 int getfloat(float *pn)
 {
-    int c;
-    int sign;
+    int c, sign;
 
     while (isspace(c = getch()))
+        ;
+
+    if (!isdigit(c) && c != EOF && !is_sign(c) && c != DECIMAL_POINT)
     {
-    }
-    if (!is_numeric_char(c))
-    {
+        ungetch(c);
         return 0;
     }
 
-    sign = (c == '-') ? -1 : 1;
+    sign = c == '-' ? -1 : 1;
     if (is_sign(c))
     {
+        int sign_char = c;
         c = getch();
+        if (!isdigit(c) && c != DECIMAL_POINT)
+        {
+            ungetch(c);
+            ungetch(sign_char);
+            return 0;
+        }
     }
 
-    // Read whole number part
     for (*pn = 0; isdigit(c); c = getch())
     {
-        *pn = 10 * *pn + char_to_digit(c);
+        *pn = 10 * *pn + (c - '0');
     }
 
-    if (is_decimal_point(c))
+    if (c == DECIMAL_POINT)
     {
         c = getch();
-    }
-
-    // Read fractional part
-    float multiplier = 1.0 / 10.0;
-    while (isdigit(c))
-    {
-        *pn += (char_to_digit(c) * multiplier);
-        multiplier /= 10.0;
-        c = getch();
+        for (float decimal_power = 1.0; isdigit(c); c = getch())
+        {
+            decimal_power /= 10.0;
+            *pn = *pn + (c - '0') * decimal_power;
+        }
     }
 
     *pn *= sign;
-
+    if (c != EOF)
+    {
+        ungetch(c);
+    }
     return c;
-}
-
-void print_numbers(float numbers[], int count)
-{
-    if (count > 0)
-    {
-        printf("%g", numbers[0]);
-    }
-    for (int i = 1; i < count; i++)
-    {
-        printf(" %g", numbers[i]);
-    }
-
-    putchar('\n');
 }
