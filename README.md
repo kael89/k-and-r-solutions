@@ -28,7 +28,7 @@ Interactive exercises will be skipped when running multiple exercises at once (e
 - Multiple exercises result summary<br/>
   ![Multiple exercises result summary](./img/multiple_exercises_result_summary.JPG)
 
-**Hint:** for interactive exercises, press **Ctrl + D** to write `EOF` in the terminal (Linux). In K & R exercises, this is used as a signal that user input has finished.
+**Hint:** for interactive exercises, press **Ctrl + D** to write `EOF` in the terminal. In K & R exercises, this is used as a signal that user input has finished.
 
 ## List of not (yet) implemented exercises
 
