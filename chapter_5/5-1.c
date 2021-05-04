@@ -1,6 +1,6 @@
 /**
- * @description As written, getint treats a + or - not followed by a digit as a valid representation of zero.
- * Fix it to push such a character back on the input.
+ * @description As written, getint treats a + or - not followed by a digit as a
+ * valid representation of zero. Fix it to push such a character back on the input.
  * @interactive
  */
 
@@ -8,50 +8,58 @@
 #include <stdio.h>
 #include "../lib.h"
 
-#define SIZE 2014
-
-int getint(int *);
-void print_numbers(int numbers[], int count);
+int getint(int *pn);
 
 int main()
 {
-    int array[SIZE];
+    int n;
+    int result;
 
-    int count = 0;
-    for (int i = 0; i < SIZE; i++)
+    bool non_int_input = FALSE;
+    do
     {
-        int result = getint(&array[count]);
-        if (result == EOF)
+        result = getint(&n);
+        if (result == 0)
         {
-            break;
+            if (!non_int_input)
+            {
+                non_int_input = TRUE;
+                printf("\nNon integer: ");
+            }
+            printf("%c", getch());
         }
-        if (result > 0)
+        else if (result != EOF)
         {
-            count++;
+            non_int_input = FALSE;
+            printf("\nInteger: %d", n);
         }
-    }
-
-    print_numbers(array, count);
-    return 0;
+    } while (result != EOF);
 }
 
 int getint(int *pn)
 {
-    int c;
-    int sign;
+    int c, sign;
 
     while (isspace(c = getch()))
+        ;
+
+    if (!isdigit(c) && c != EOF && !is_sign(c))
     {
-    }
-    if (!is_numeric_char(c))
-    {
+        ungetch(c);
         return 0;
     }
 
-    sign = (c == '-') ? -1 : 1;
+    sign = c == '-' ? -1 : 1;
     if (is_sign(c))
     {
+        int sign_char = c;
         c = getch();
+        if (!isdigit(c))
+        {
+            ungetch(c);
+            ungetch(sign_char);
+            return 0;
+        }
     }
 
     for (*pn = 0; isdigit(c); c = getch())
@@ -60,20 +68,9 @@ int getint(int *pn)
     }
 
     *pn *= sign;
-
+    if (c != EOF)
+    {
+        ungetch(c);
+    }
     return c;
-}
-
-void print_numbers(int numbers[], int count)
-{
-    if (count > 0)
-    {
-        printf("%d", numbers[0]);
-    }
-    for (int i = 1; i < count; i++)
-    {
-        printf(" %d", numbers[i]);
-    }
-
-    putchar('\n');
 }
