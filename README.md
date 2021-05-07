@@ -6,13 +6,13 @@ This repository features solutions to the exercises of the book [The C Programmi
 
 ```bash
 # All exercises
-./run.sh
+./run
 
 # Exercises in a specific chapter
-./run.sh 1
+./run 1
 
 # Specific exercise, eg 1-5
-./run.sh 1 5
+./run 1 5
 ```
 
 Each exercise features a docblock at its top, featuring:
