@@ -54,24 +54,6 @@ int get_line(char line[], int max_length)
     return i;
 }
 
-void trim_right(char string[])
-{
-    int length = str_len(string);
-
-    for (int i = length - 1; i >= 0; i++)
-    {
-        if (!is_whitespace(string[i]))
-        {
-            if (is_line(string))
-            {
-                string[i + 1] = '\n';
-            }
-            break;
-        }
-        string[i] = '\0';
-    }
-}
-
 int str_cmp(char s1[], char s2[])
 {
     int i, j;

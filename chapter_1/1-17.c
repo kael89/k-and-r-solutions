@@ -8,8 +8,6 @@
 #define MAX_LINE 1024
 #define PRINT_THRESHOLD 80
 
-void print_line(char line[]);
-
 int main()
 {
     char line_buffer[MAX_LINE];

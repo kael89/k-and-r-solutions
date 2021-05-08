@@ -7,8 +7,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void itoa(int n, char s[], int w);
-bool test(int n, int w, char expected[]);
+bool test(int, int, char[]);
 
 int main()
 {

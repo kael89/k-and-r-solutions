@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-int strindex(char s[], char t[]);
-bool test(char s[], char t[], int expected);
+bool test(char[], char[], int);
 
 int main()
 {

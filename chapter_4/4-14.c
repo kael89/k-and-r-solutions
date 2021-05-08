@@ -6,8 +6,8 @@
 #include <stdio.h>
 #include "../lib.h"
 
-bool test_ints();
 bool test_doubles();
+bool test_ints();
 bool test_name_conflict();
 
 #define swap(t, x, y) \

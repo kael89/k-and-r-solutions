@@ -7,9 +7,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-bool test(char hex[], int expected);
-int htoi(char s[]);
-int digit_to_int(char digit);
+bool test(char[], int);
 
 int main()
 {
@@ -26,9 +24,10 @@ int main()
     return success ? 0 : 1;
 }
 
-bool test(char hex[], int expected)
+int digit_to_int(char digit)
 {
-    return test_equal_ints(hex, htoi(hex), expected);
+    int value = '0' <= digit && digit <= '9' ? digit - '0' : digit - 'A' + 10;
+    return value;
 }
 
 int htoi(char s[])
@@ -56,8 +55,7 @@ int htoi(char s[])
     return result;
 }
 
-int digit_to_int(char digit)
+bool test(char hex[], int expected)
 {
-    int value = '0' <= digit && digit <= '9' ? digit - '0' : digit - 'A' + 10;
-    return value;
+    return test_equal_ints(hex, htoi(hex), expected);
 }

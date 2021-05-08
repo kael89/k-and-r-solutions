@@ -8,8 +8,8 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void entab(int tab_size);
-void print_whitespace(int space_count, int tab_size);
+void entab(int);
+void print_whitespace(int, int);
 
 int main()
 {

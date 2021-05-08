@@ -58,13 +58,10 @@ enum symbols
 
 int OPS[] = {ADD, DIV, MOD, MUL, SUB};
 
-void push(double f);
-double pop(void);
 bool is_empty(void);
-int getop(char s[]);
-void read_word(char s[]);
-bool is_operator(char c);
-bool is_valid_number(char s[]);
+int getop(char[]);
+double pop(void);
+void push(double);
 
 int main()
 {
@@ -173,48 +170,6 @@ bool is_empty(void)
     return sp == 0;
 }
 
-int getop(char s[])
-{
-    read_word(s);
-
-    if (s[1] == '\0' && (is_operator(s[0]) || s[0] == '\n' || s[0] == EOF))
-    {
-        return s[0];
-    }
-    if (str_equals(s, "exp"))
-    {
-        return EXP;
-    }
-    if (str_equals(s, "pow"))
-    {
-        return POW;
-    }
-    if (str_equals(s, "sin"))
-    {
-        return SIN;
-    }
-    return is_valid_number(s) ? NUMBER : INVALID;
-}
-
-void read_word(char s[])
-{
-    int c;
-    while ((s[0] = c = getch()) == ' ' || c == '\t')
-        ;
-    if (c == '\n')
-    {
-        s[1] = '\0';
-        return;
-    }
-
-    int i = 1;
-    while ((s[i++] = c = getch()) != ' ' && c != '\t' && c != EOF && c != '\n')
-        ;
-
-    ungetch(c);
-    s[--i] = '\0';
-}
-
 bool is_operator(char c)
 {
     for (int i = 0; i < sizeof OPS / sizeof *OPS; i++)
@@ -265,4 +220,46 @@ bool is_valid_number(char s[])
     }
 
     return TRUE;
+}
+
+void read_word(char s[])
+{
+    int c;
+    while ((s[0] = c = getch()) == ' ' || c == '\t')
+        ;
+    if (c == '\n')
+    {
+        s[1] = '\0';
+        return;
+    }
+
+    int i = 1;
+    while ((s[i++] = c = getch()) != ' ' && c != '\t' && c != EOF && c != '\n')
+        ;
+
+    ungetch(c);
+    s[--i] = '\0';
+}
+
+int getop(char s[])
+{
+    read_word(s);
+
+    if (s[1] == '\0' && (is_operator(s[0]) || s[0] == '\n' || s[0] == EOF))
+    {
+        return s[0];
+    }
+    if (str_equals(s, "exp"))
+    {
+        return EXP;
+    }
+    if (str_equals(s, "pow"))
+    {
+        return POW;
+    }
+    if (str_equals(s, "sin"))
+    {
+        return SIN;
+    }
+    return is_valid_number(s) ? NUMBER : INVALID;
 }

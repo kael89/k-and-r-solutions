@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void squeeze(char s1[], char s2[]);
-bool test(char input[], char search[], char expected[]);
+bool test(char[], char[], char[]);
 
 int main()
 {

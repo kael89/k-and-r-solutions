@@ -7,10 +7,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-char get_digit(int n, int b);
-void itob(int n, char s[], int b);
-void reverse(char s[]);
-bool test(int n, int b, char expected[]);
+bool test(int, int, char[]);
 
 int main()
 {
@@ -45,6 +42,18 @@ int main()
     return success ? 0 : 1;
 }
 
+char get_digit(int n, int b)
+{
+    int value = n % b;
+
+    if (value > 9)
+    {
+        value -= 10;
+        return value + 'A';
+    }
+    return value + '0';
+}
+
 void itob(int n, char s[], int b)
 {
     int i = 0;
@@ -67,18 +76,6 @@ void itob(int n, char s[], int b)
     }
     s[i] = '\0';
     reverse(s);
-}
-
-char get_digit(int n, int b)
-{
-    int value = n % b;
-
-    if (value > 9)
-    {
-        value -= 10;
-        return value + 'A';
-    }
-    return value + '0';
 }
 
 bool test(int n, int b, char expected[])

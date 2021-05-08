@@ -6,8 +6,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-int lower(int c);
-bool test(char input, char expected);
+bool test(char, char);
 
 int main()
 {
@@ -20,13 +19,13 @@ int main()
     return success ? 0 : 1;
 }
 
+int lower(int c)
+{
+    return c >= 'A' && c <= 'Z' ? c + 'a' - 'A' : c;
+}
+
 bool test(char input, char expected)
 {
     char description[2] = {input, '\0'};
     return test_equal_chars(description, lower(input), expected);
-}
-
-int lower(int c)
-{
-    return c >= 'A' && c <= 'Z' ? c + 'a' - 'A' : c;
 }

@@ -9,9 +9,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-double atof(char s[]);
-// double pow(double base, int exp);
-bool test(char s[], float expected);
+bool test(char[], float);
 
 int main()
 {

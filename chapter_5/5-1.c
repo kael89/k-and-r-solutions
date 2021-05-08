@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-int getint(int *pn);
+int getint(int *);
 
 int main()
 {

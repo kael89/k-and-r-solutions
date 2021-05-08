@@ -8,8 +8,7 @@
 
 #define MAX_BITS 32
 
-bool test(unsigned x, int p, int n, unsigned y, unsigned expected);
-unsigned setbits(unsigned x, int p, int n, unsigned y);
+bool test(unsigned, int, int, unsigned, unsigned);
 
 int main()
 {
@@ -22,6 +21,16 @@ int main()
     success &= test(0b1, 3, 4, 0b100100, 0b00100);
 
     return success ? 0 : 1;
+}
+
+unsigned setbits(unsigned x, int p, int n, unsigned y)
+{
+    int keep_right_bits_mask = ~(~0 << n);
+    int left_shift = (p - n + 1);
+
+    int replacement = (y & keep_right_bits_mask) << left_shift;
+    int removal_mask = ~(keep_right_bits_mask << left_shift);
+    return (x & removal_mask) | replacement;
 }
 
 bool test(unsigned x, int p, int n, unsigned y, unsigned expected)
@@ -39,14 +48,4 @@ bool test(unsigned x, int p, int n, unsigned y, unsigned expected)
     char description[128] = "";
     sprintf(description, "x: %s, p: %d, n: %d, y: %s", x_bits, p, n, y_bits);
     return test_equal_strings(description, result_bits, expected_bits);
-}
-
-unsigned setbits(unsigned x, int p, int n, unsigned y)
-{
-    int keep_right_bits_mask = ~(~0 << n);
-    int left_shift = (p - n + 1);
-
-    int replacement = (y & keep_right_bits_mask) << left_shift;
-    int removal_mask = ~(keep_right_bits_mask << left_shift);
-    return (x & removal_mask) | replacement;
 }

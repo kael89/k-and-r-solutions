@@ -8,8 +8,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void detab(int tab_size);
-void print_spaces(int count);
+void detab(int);
 
 int main()
 {
@@ -18,9 +17,9 @@ int main()
     return 0;
 }
 
-void detab(int tab_size)
+void detab(int n)
 {
-    int spaces_to_tab = tab_size;
+    int spaces_to_tab = n;
     char c;
     while ((c = getchar()) != EOF)
     {
@@ -42,7 +41,7 @@ void detab(int tab_size)
 
         if (spaces_to_tab == 0)
         {
-            spaces_to_tab = tab_size;
+            spaces_to_tab = n;
         }
     }
 }

@@ -8,8 +8,7 @@
 
 #define MAX_BITS 32
 
-int bitcount(unsigned x);
-bool test(unsigned input, int expected);
+bool test(unsigned, int);
 
 int main()
 {
@@ -28,14 +27,6 @@ int main()
     return success ? 0 : 1;
 }
 
-bool test(unsigned input, int expected)
-{
-    char bits[MAX_BITS];
-
-    get_bits(input, bits);
-    return test_equal_ints(bits, bitcount(input), expected);
-}
-
 int bitcount(unsigned x)
 {
     int b = 0;
@@ -46,4 +37,12 @@ int bitcount(unsigned x)
     }
 
     return b;
+}
+
+bool test(unsigned input, int expected)
+{
+    char bits[MAX_BITS];
+
+    get_bits(input, bits);
+    return test_equal_ints(bits, bitcount(input), expected);
 }

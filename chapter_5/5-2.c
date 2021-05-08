@@ -10,7 +10,7 @@
 
 #define DECIMAL_POINT '.'
 
-int getfloat(float *pn);
+int getfloat(float *);
 
 int main()
 {

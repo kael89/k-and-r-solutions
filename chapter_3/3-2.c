@@ -8,8 +8,7 @@ characters.
 #include <stdio.h>
 #include "../lib.h"
 
-void escape(char s[], char t[]);
-bool test(char description[], char input[], char expected[]);
+bool test(char[], char[], char[]);
 
 int main()
 {

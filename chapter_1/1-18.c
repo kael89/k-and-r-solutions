@@ -10,7 +10,7 @@
 #define MAX_INPUT_SIZE 8086
 #define MAX_LINE_SIZE 1024
 
-void trim_right(char string[]);
+void trim_right(char[]);
 
 int main()
 {
@@ -31,4 +31,22 @@ int main()
     }
 
     printf("%s", input);
+}
+
+void trim_right(char string[])
+{
+    int length = str_len(string);
+
+    for (int i = length; i >= 0; i++)
+    {
+        if (!is_whitespace(string[i]))
+        {
+            if (is_line(string))
+            {
+                string[i + 1] = '\n';
+            }
+            break;
+        }
+        string[i] = '\0';
+    }
 }

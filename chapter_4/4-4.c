@@ -12,13 +12,13 @@
 #define MAXVAL 100
 #define INVALID INT_MIN
 
-void push(int f);
-int pop(void);
-int peek(void);
-void duplicate_top(void);
-bool swap(void);
 void clear(void);
-bool test(char description[], int expected[], int expected_len);
+void duplicate_top(void);
+int peek(void);
+int pop(void);
+void push(int);
+bool swap(void);
+bool test(char[], int[], int);
 
 int sp = 0;
 int val[MAXVAL];

@@ -9,8 +9,7 @@
 
 #define NOT_FOUND -1
 
-bool test(char input[], char target[], int expected);
-int any(char s1[], char s2[]);
+bool test(char[], char[], int);
 
 int main()
 {

@@ -8,8 +8,7 @@
 
 #define MAX_BITS 33
 
-bool test(unsigned x, int n, unsigned expected);
-unsigned rightrot(unsigned x, int n);
+bool test(unsigned, int, unsigned);
 
 int main()
 {
@@ -25,6 +24,12 @@ int main()
     return success ? 0 : 1;
 }
 
+unsigned rightrot(unsigned x, int n)
+{
+    int bit_length = sizeof(unsigned) * 8;
+    return (x << (bit_length - n)) | (x >> n);
+}
+
 bool test(unsigned x, int n, unsigned expected)
 {
     char x_bits[MAX_BITS];
@@ -38,10 +43,4 @@ bool test(unsigned x, int n, unsigned expected)
     char description[50] = "";
     sprintf(description, "x: %s, n: %d", x_bits, n);
     return test_equal_strings(description, result_bits, expected_bits);
-}
-
-unsigned rightrot(unsigned x, int n)
-{
-    int bit_length = sizeof(unsigned) * 8;
-    return (x << (bit_length - n)) | (x >> n);
 }

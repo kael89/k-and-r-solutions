@@ -6,8 +6,6 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void _reverse(char s[]);
-void swap(char s[], int i, int j);
 bool test(char s[], char expected[]);
 
 int main()
@@ -21,6 +19,13 @@ int main()
     success &= test("alpha beta", "ateb ahpla");
 
     return success ? 0 : 1;
+}
+
+void swap(char s[], int i, int j)
+{
+    char temp = s[i];
+    s[i] = s[j];
+    s[j] = temp;
 }
 
 void _reverse(char s[])
@@ -49,13 +54,6 @@ void _reverse(char s[])
         start = -1;
         end = -1;
     }
-}
-
-void swap(char s[], int i, int j)
-{
-    char temp = s[i];
-    s[i] = s[j];
-    s[j] = temp;
 }
 
 bool test(char s[], char expected[])

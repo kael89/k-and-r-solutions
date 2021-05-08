@@ -8,8 +8,7 @@
 
 #define MAX_BITS 32
 
-bool test(unsigned x, int p, int n, unsigned expected);
-unsigned invert(unsigned x, int p, int n);
+bool test(unsigned, int, int, unsigned);
 
 int main()
 {
@@ -25,6 +24,13 @@ int main()
     return success ? 0 : 1;
 }
 
+unsigned invert(unsigned x, int p, int n)
+{
+    int keep_mask = ~(~0 << n) << (p - n + 1);
+    int removal_mask = ~keep_mask;
+    return (x & removal_mask) | (~x & keep_mask);
+}
+
 bool test(unsigned x, int p, int n, unsigned expected)
 {
     char x_bits[MAX_BITS];
@@ -38,11 +44,4 @@ bool test(unsigned x, int p, int n, unsigned expected)
     char description[50] = "";
     sprintf(description, "x: %s, p: %d, n: %d", x_bits, p, n);
     return test_equal_strings(description, result_bits, expected_bits);
-}
-
-unsigned invert(unsigned x, int p, int n)
-{
-    int keep_mask = ~(~0 << n) << (p - n + 1);
-    int removal_mask = ~keep_mask;
-    return (x & removal_mask) | (~x & keep_mask);
 }

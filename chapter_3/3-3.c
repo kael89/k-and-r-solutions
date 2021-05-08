@@ -8,10 +8,7 @@
 #include <stdio.h>
 #include "../lib.h"
 
-void expand(char s1[], char s2[]);
-char get_range_end(char c);
-int copy_range(char t[], int p, char range[]);
-bool test(char input[], char expected[]);
+bool test(char[], char[]);
 
 int main()
 {
@@ -44,6 +41,20 @@ int main()
     success &= test("-b-d6-8e-", "-bcd678e-");
 
     return success ? 0 : 1;
+}
+
+/**
+ * Returns the number of characters that were copied
+ */
+int copy_range(char t[], int p, char range[])
+{
+    char c;
+    for (c = range[0]; c <= range[1]; c++, p++)
+    {
+        t[p] = c;
+    }
+
+    return c - range[0];
 }
 
 void expand(char s1[], char s2[])
@@ -94,20 +105,6 @@ void expand(char s1[], char s2[])
         // Copy remaining chars
         s2[j++] = s1[i++];
     } while (s1[i] != '\0');
-}
-
-/**
- * Returns the number of characters that were copied
- */
-int copy_range(char t[], int p, char range[])
-{
-    char c;
-    for (c = range[0]; c <= range[1]; c++, p++)
-    {
-        t[p] = c;
-    }
-
-    return c - range[0];
 }
 
 bool test(char input[], char expected[])

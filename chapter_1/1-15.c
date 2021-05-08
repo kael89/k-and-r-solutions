@@ -8,7 +8,7 @@
 #define UPPER_TEMP 300
 #define STEP 20
 
-float fahrenheit_to_celsius(int fahrenheit);
+float fahrenheit_to_celsius(int);
 
 int main()
 {
