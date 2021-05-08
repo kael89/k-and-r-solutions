@@ -1,39 +1,54 @@
 /**
  * @description Write a pointer version of the function strcat that we showed in Chapter 2:
  * strcat(s,t) copies the string t to the end of s.
- * @interactive
  */
 
 #include <stdio.h>
+#include "../lib.h"
 
-#define MAX_LENGTH 100
+#define MAX_LENGTH 32
 
-char *strcat(char *str1, char *str2);
+bool test(char[], char[], char[]);
 
 int main()
 {
-    char str1[MAX_LENGTH];
-    char str2[MAX_LENGTH];
+    bool success = TRUE;
+    success &= test("", "", "");
+    success &= test("a", "a", "aa");
+    success &= test("a", "b", "ab");
+    success &= test("", "beta", "beta");
+    success &= test("alpha", "beta", "alphabeta");
+    success &= test("alpha", "", "alpha");
 
-    scanf("%s", str1);
-    scanf("%s", str2);
-    printf("%s\n", strcat(str1, str2));
-
-    return 0;
+    return success ? 0 : 1;
 }
 
-char *strcat(char *str1, char *str2)
+void _strcat(char *s, char *t)
 {
-    char *result_p = str1;
-
-    while (*str1)
+    while (*s != '\0')
     {
-        str1++;
+        s++;
     }
-    // -Wparentheses compiler option requires double parentheses here
-    while ((*str1++ = *str2++))
-    {
-    }
+    while ((*s++ = *t++) != '\0')
+        ;
+}
 
-    return result_p;
+bool test(char s_input[], char t_input[], char expected[])
+{
+    char s_description[MAX_LENGTH] = "";
+    char t_description[MAX_LENGTH] = "";
+    char description[2 * MAX_LENGTH + 10] = "";
+
+    stringify(s_description, s_input);
+    stringify(t_description, t_input);
+    sprintf(description, "%s + %s", s_description, t_description);
+
+    char s[MAX_LENGTH] = "";
+    char t[MAX_LENGTH] = "";
+    // Need to copy input in a new array, cause the input is provided as string literals
+    copy_str(s, s_input);
+    copy_str(t, t_input);
+
+    _strcat(s, t);
+    return test_equal_strings(description, s, expected);
 }
