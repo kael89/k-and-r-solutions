@@ -1,102 +1,164 @@
 /**
- * @description Write versions of the library functions strncpy, strncat, and strncmp,
+ * @description  Write versions of the library functions strncpy, strncat, and strncmp,
  * which operate on at most the first n characters of their argument strings.
- * For example, strncpy(s,t,n) copies at most n characters of t to s.
- * @interactive
+ * For  example, strncpy(s,t,n) copies at most n characters of t to s
  */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include "../lib.h"
 
-#define MAX_LENGTH 100
+#define MAX_LENGTH 32
 
-char *strn_cpy(char *s, char *t, int n);
-int strn_cmp(char *s, char *t, int n);
-char *strn_cat(char *str1, char *str2, int n);
+typedef enum
+{
+    LT = -1,
+    EQ = 0,
+    GT = 1,
+} comparison;
+
+bool test_strncat(char[], char[], int, char[]);
+bool test_strncmp(char[], char[], int, int);
+bool test_strncpy(char[], char[], int, char[]);
 
 int main()
 {
-    char str1[MAX_LENGTH];
-    char str2[MAX_LENGTH];
-    char str3[MAX_LENGTH];
-    char str4[MAX_LENGTH];
-    char str5[MAX_LENGTH];
-    char str6[MAX_LENGTH];
-    int n;
+    bool success = TRUE;
 
-    printf("strn_cpy\n");
-    scanf("%s", str1);
-    scanf("%s", str2);
-    scanf("%d", &n);
-    printf("%s\n", strn_cpy(str1, str2, n));
+    printf("* strncat\n");
+    success &= test_strncat("", "", 0, "");
+    success &= test_strncat("", "", 1, "");
+    success &= test_strncpy("", "", -1, "");
+    success &= test_strncat("a", "", 0, "a");
+    success &= test_strncat("a", "", 1, "a");
+    success &= test_strncat("a", "b", 1, "ab");
+    success &= test_strncpy("a", "b", -1, "a");
+    success &= test_strncat("alpha", "beta", 2, "alphabe");
+    success &= test_strncat("alpha", "beta", 4, "alphabeta");
+    success &= test_strncat("alpha", "beta", 10, "alphabeta");
 
-    printf("strn_cmp\n");
-    scanf("%s", str3);
-    scanf("%s", str4);
-    scanf("%d", &n);
-    printf("%d\n", strn_cmp(str3, str4, n));
+    printf("* strncmp\n");
+    success &= test_strncmp("", "", 0, EQ);
+    success &= test_strncmp("", "", 1, EQ);
+    success &= test_strncmp("", "", -1, EQ);
+    success &= test_strncmp("a", "", 0, EQ);
+    success &= test_strncmp("a", "", 1, GT);
+    success &= test_strncmp("", "a", 1, LT);
+    success &= test_strncmp("a", "a", 1, EQ);
+    success &= test_strncmp("a", "b", 1, LT);
+    success &= test_strncmp("a", "b", -1, EQ);
+    success &= test_strncmp("aa", "a", 1, EQ);
+    success &= test_strncmp("aa", "a", 2, GT);
+    success &= test_strncmp("a", "aaa", 2, LT);
+    success &= test_strncmp("aa", "aaa", 3, LT);
+    success &= test_strncmp("aaa", "aa", 3, GT);
+    success &= test_strncmp("a", "A", 1, GT);
+    success &= test_strncmp("A", "a", 1, LT);
 
-    printf("strn_cat\n");
-    scanf("%s", str5);
-    scanf("%s", str6);
-    scanf("%d", &n);
-    printf("%s\n", strn_cat(str5, str6, n));
+    printf("* strncpy\n");
+    success &= test_strncpy("", "", 0, "");
+    success &= test_strncpy("", "", 1, "");
+    success &= test_strncpy("", "", -1, "");
+    success &= test_strncpy("a", "", 0, "a");
+    success &= test_strncpy("a", "", 1, "");
+    success &= test_strncpy("a", "b", 1, "b");
+    success &= test_strncpy("a", "b", -1, "a");
+    success &= test_strncpy("alpha", "cat", 2, "capha");
+    success &= test_strncpy("alpha", "cat", 3, "catha");
+    success &= test_strncpy("alpha", "cat", 10, "cat");
+    printf("\n");
 
-    return 0;
+    return success ? 0 : 1;
 }
 
-char *strn_cpy(char *s, char *t, int n)
+void _strncat(char *s, char *t, int n)
 {
-    char *result_p = s;
-
-    while (n > 0 && (*s++ = *t++))
+    while (*s != '\0')
     {
-        n--;
+        s++;
+    }
+    while (n-- > 0 && (*s++ = *t++) != '\0')
+    {
+        ;
+    }
+}
+
+int _strncmp(char *s, char *t, int n)
+{
+    if (n <= 0)
+    {
+        return 0;
     }
 
-    while (n--)
+    while (n-- > 0 && (*s == *t) && *s != '\0' && *t != '\0')
+    {
+        if (n > 0)
+        {
+            s++;
+            t++;
+        }
+    }
+    return *s - *t;
+}
+
+void _strncpy(char *s, char *t, int n)
+{
+    while (n-- > 0 && (*s++ = *t++) != '\0')
+    {
+        ;
+    }
+    while (n-- > 0 && *s != '\0')
     {
         *s++ = '\0';
     }
-
-    return result_p;
 }
 
-int strn_cmp(char *s, char *t, int n)
+void get_test_description(char *description, char *s, char *t, int n)
 {
-    while (n-- > 0)
-    {
-        if (*s != *t)
-        {
-            return *s - *t;
-        }
+    char s_description[MAX_LENGTH] = "";
+    char t_description[MAX_LENGTH] = "";
 
-        s++;
-        t++;
-    }
-
-    return 0;
+    stringify(s_description, s);
+    stringify(t_description, t);
+    sprintf(description, "%s, %s, %d", s_description, t_description, n);
 }
 
-char *strn_cat(char *str1, char *str2, int n)
+bool test_strncpy(char s_input[], char t_input[], int n, char expected[])
 {
-    char *result_p = str1;
+    char description[2 * MAX_LENGTH + 10] = "";
+    get_test_description(description, s_input, t_input, n);
 
-    while (*str1)
-    {
-        str1++;
-    }
-    while (n > 0 && (*str1 = *str2))
-    {
-        n--;
-        str1++;
-        str2++;
-    }
+    char s[MAX_LENGTH] = "";
+    char t[MAX_LENGTH] = "";
+    copy_str(s, s_input);
+    copy_str(t, t_input);
+    _strncpy(s, t, n);
 
-    if (n == 0)
-    {
-        *str1 = '\0';
-    }
+    return test_equal_strings(description, s, expected);
+}
 
-    return result_p;
+bool test_strncat(char s_input[], char t_input[], int n, char expected[])
+{
+    char description[2 * MAX_LENGTH + 10] = "";
+    get_test_description(description, s_input, t_input, n);
+
+    char s[MAX_LENGTH] = "";
+    char t[MAX_LENGTH] = "";
+    copy_str(s, s_input);
+    copy_str(t, t_input);
+    _strncat(s, t, n);
+
+    return test_equal_strings(description, s, expected);
+}
+
+bool test_strncmp(char s_input[], char t_input[], int n, int expected)
+{
+    char description[2 * MAX_LENGTH + 10] = "";
+    get_test_description(description, s_input, t_input, n);
+
+    char s[MAX_LENGTH] = "";
+    char t[MAX_LENGTH] = "";
+    copy_str(s, s_input);
+    copy_str(t, t_input);
+
+    return test_equal_signs(description, _strncmp(s, t, n), expected);
 }
