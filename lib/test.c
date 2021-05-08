@@ -9,6 +9,7 @@ typedef enum
     CHAR,
     DOUBLE,
     INT,
+    SIGN,
     STRING,
 } type;
 
@@ -37,6 +38,22 @@ bool compare_typed_values(type t, void *a_p, void *b_p)
         return fabs(a_double - b_double) <= FLT_EPSILON * maximum;
     case INT:
         return *((int *)a_p) == *((int *)b_p);
+    case SIGN:;
+        int a_int = *((int *)a_p);
+        int b_int = *((int *)b_p);
+
+        if (a_int < 0)
+        {
+            return b_int < 0;
+        }
+        else if (a_int == 0)
+        {
+            return b_int == 0;
+        }
+        else if (a_int > 0)
+        {
+            return b_int > 0;
+        }
     case STRING:
         return str_equals((char *)a_p, (char *)b_p);
     default:
@@ -85,6 +102,21 @@ void print_typed_value(type t, void *value_p)
         break;
     case INT:
         printf("%d", *((int *)value_p));
+        break;
+    case SIGN:;
+        int value = *((int *)value_p);
+        if (value < 0)
+        {
+            printf("negative");
+        }
+        else if (value == 0)
+        {
+            printf("zero");
+        }
+        else if (value > 0)
+        {
+            printf("positive");
+        }
         break;
     case STRING:
         printf("%s", (char *)value_p);
@@ -194,6 +226,11 @@ bool test_equal_ints(char description[], int received, int expected)
 bool test_equal_int_arrays(char description[], int received[], int received_len, int expected[], int expected_len)
 {
     return test_equal_arrays(INT, description, received, received_len, expected, expected_len);
+}
+
+bool test_equal_signs(char description[], int received, int expected)
+{
+    return test_equal(SIGN, description, &received, &expected);
 }
 
 bool test_equal_strings(char description[], char received[], char expected[])
