@@ -8,3 +8,4 @@ void reverse(char s[]);
 int str_cmp(char s1[], char s2[]);
 int str_len(char string[]);
 bool str_equals(char s1[], char s2[]);
+void stringify(char target[], char s[]);

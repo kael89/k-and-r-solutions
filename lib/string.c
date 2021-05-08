@@ -85,3 +85,15 @@ void reverse(char s[])
         s[j] = temp;
     }
 }
+
+void stringify(char target[], char s[])
+{
+    if (s[0] == '\0')
+    {
+        copy_str(target, "''");
+    }
+    else
+    {
+        copy_str(target, s);
+    }
+}
